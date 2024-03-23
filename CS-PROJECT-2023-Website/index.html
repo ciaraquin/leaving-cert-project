@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Battleship</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+$(document).ready(function(){
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+  if (this.hash !== "") {
+    event.preventDefault();
+
+    var hash = this.hash;
+    $('html, body').animate({
+      scrollTop: $(hash).offset().top
+    }, 900, function(){
+      window.location.hash = hash;
+      });
+    }
+  });
+})
+</script> 
+  <style>
+    .navbar {
+    margin-bottom: 0;
+    background-color: #1D3F6E;
+    z-index: 9999;
+    border: 0;
+    border-radius: 0;
+  }
+  
+  .navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+  }
+  
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #1D3F6E !important;
+    background-color: #fff !important;
+  }
+  .blue-text {
+    color: #1D3F6E;
+  }
+  .navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+  }
+  .jumbotron {
+    background-color: #1D3F6E;
+    color: #ffffff;
+    padding: 100px 25px;
+  }
+  footer .glyphicon {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #1D3F6E;
+  }
+
+</style>
+
+</head>
+
+<body id="top" data-spy="scroll" data-target=".navbar" data-offset="60">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#top">BATTLESHIP</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#meeting_brief">Meeting the Brief</a></li>
+        <li><a href="#investigation">Investigation and Plan</a></li>
+        <li><a href="#design">Design</a></li>
+        <li><a href="#implamentation">Implementation</a></li>
+        <li><a href="#testing">Testing</a></li>
+        <li><a href="#evaluation">Evaluation</a></li>
+        <li><a href="#references">References</a></li>
+        <li><a href="#wordcount">Word Count</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+</div>
+
+
+  <div class="jumbotron text-center">
+  <h1>BATTLESHIP</h1> 
+  <p>Leaving Cert CS Project 2023</p> 
+  <form class="form-inline">
+
+    </div>
+  </form>
+</div>
+
+  <div id='meeting_brief' class = 'container'>
+    <br><br>
+    <h3 class= "blue-text">Meeting the Brief</h3>
+    <br><br>
+    <video align=centre width="75%" controls>
+      <source src="project_video.mp4" type="video/mp4">
+Your browser does not support the video tag.
+    </video> 
+ 
+  </div>
+
+  <br><hr>
+  
+  <div id='investigation' class='container text-left'>
+    <br><br>
+    <h3 class= "blue-text ">Investigation and Plan</h3>
+    <br>
+    <img align=right class="img-rounded" src="images/ideas.png" width= 40%>
+    <p>The openness of the brief came with positive and negative aspects. I found choosing a game to model the hardest aspects of this project. While it was simple to propose games to model, whether they could meet the requirements was a different question. I cycled through different ideas (which can be seen to the right) documenting how they would or would not meet the requirements outlined in the brief before settling on one; below, I will talk about some of these.</p>
+
+    <br><br>
+      <b>Uno</b>
+    <p>My first idea of a game to model was Uno. It appeared to fulfil most of the requirements, but it ended up being more difficult than I anticipated. Uno is a card matching game with a deck of 108 cards, including special cards that would change depending on the situation they were used in, making the code quite long and difficult. I struggled while trying to write a simplified version of the game. I was also not sure how this game would be played for the simulation portion of the project, so I disregarded this idea.</p>
+
+    <br><br> 
+    <b>Wordle</b>
+    <p>After moving on from Uno, I came to Wordle, a game in which the player must guess a 5-character word in 6 moves. After doing a substantial portion of research, I determined that it would not be a viable choice for meeting the brief. The program would have to take an input of five-letter words, validate them, and highlight the letters in the chosen word. While some of this would be simple, I could not find an efficient method to validate the words entered by the user. Although it would have met some of the requirements, such as inputs and data analysis, to make the game fit the requirements, generous portions would have to be changed. This would result in the game being far from the original.</p>
+<br><br>
+    <b>Battleship</b>
+    <p>Disregarding the ideas above, I decided on modelling battleship. This game is simple in concept, capable of simplification, and can be played in a variety of modes, including single player, multi-player, and simulation play. It can also accept inputs, has data that can be stored and used later for analysis and could have parameters that can change within the game. With my aim being that of having a complete project within the available time in mind, I decided to create a simple base that I could improve upon if time allowed, which will be discussed later in this report.</p>
+
+    <br><br>
+    <b>Objectives</b><br>
+    <p>I set the following objectives for the development of the code and to demonstrate my skill in developing a usable and interesting game.</p>
+    <ol>
+      <li>Have functioning versions of the game for all game modes.</li>
+      <li>Store variables from the game, including hits and misses in a CSV file.</li>
+      <li>Change guesses available to the player to see how this effects the game.</li>
+      <li>Show the location of ships if the player loses.</li>
+      <li>Make difficulty levels.</li>
+      <li>Ask users to enter their own ship locations in multiplayer mode.</li>
+      <li>Allow the user to enter how many times the simulation will run.</li>
+    </ol>
+ <p>
+  </div>
+  <br><hr>
+
+<div id='design' class = 'container'>
+  <br><br>
+  <h3 class= "blue-text ">Design</h3>
+  <img align=right src = "images/flowchart.drawio.png" width= 55%>
+  <p><br>
+  
+  <b>Single-player mode</b>
+  <p>Here there will be a set of three pre-selected ship layouts that will be selected at random. The player will then enter a coordinate, and the board grid will change depending on whether the coordinate hits or misses a ship. This will be repeated for the user to guess multiple times. If three ships are hit, the game is won. This could be extended to add more ships in the future. If the player exceeds 20 guesses, the game is over, and the player has lost. At the end of the game, the type of game, number of hits and misses, and result of the game will be recorded in the CSV file for further analysis.</p><br>
+
+  <b>Multiplayer mode</b><br>
+  
+  <p>In multiplayer mode, each player will place their own three ships by entering three coordinates. The console will then clear, and the second user will design their layout. The users will then take turns entering coordinates to hit ships. The rules will then follow those of single-player mode, with the board changing depending on if a coordinate was a hit or a miss. The first player to hit three ships wins the game. At the end of the game, the type of game, number of hits and misses, and result of the game will be recorded in the CSV file for further analysis.</p><br>
+
+  <b>Simulation play</b><br>
+  <p>The computer will use Python's random function to enter coordinates against the three pre-selected ship layouts. More coordinates will be entered by the computer until either all ships have been sunk and the game is won, or the computer runs out of turns. At the end of the game, the type of game, number of hits and misses, and result of the game will be recorded in the CSV file for further analysis.</p><br>
+
+  
+  <b> Modelling and abstraction</b>
+  <br>
+  <p>I am using modelling in my project by creating a text-based version of the board and by marking the positions of ships when they have been hit or missed.<br><br>I am using abstraction in my project by removing some of the unnecessary aspects of the board game Battleship in order to adapt it to my project and execute it in Python. Some of the details of Battleship I disregarded, including the physical board and physically marking hits and misses, which I replaced with text output. I also removed ships greater than one unit in length to make the game easier to implement.</p>
+</div>
+  
+<br><hr>
+  
+<div id='implamentation' class = 'container'>
+  <br><br>
+  <h3 class= "blue-text ">Implementation</h3>
+  <br>
+  <b>Single-player mode</b><br>
+  <p>I started the programming section of this project with single-player, deciding it would be easier to adapt this code for multiplayer and simulation modes. Firstly, I created a <i>nested list</i> for the preselected ship layouts, initialised the <i>variables</i> for hits and misses, and, using a <i>for loop</i>, I created the text-based game board. Through using Python's random library, one of the three pre-set boards is selected randomly, I then add the locations of these ships to a separate list so it can be printed at the end to reveal the locations of the ships. While guesses stay under 20 and the user has not already won, a <i>loop</i> prompts the user to enter a coordinate, then determines if it was a hit or miss, and prints the board again, marking the board with a ‘1’ or an 'X’ accordingly. The <i>while loop</i> then repeats until the user either wins or runs out of guesses. If the user runs out of guesses, the program will reveal the locations.</p><br>
+  
+  <b>Multiplayer mode</b><br>
+  <p>I found multiplayer mode to be the hardest out of the modes. I tested multiple methods of executing the code, and in the end, I used my flow chart to work out how to program this section. First, I adapted the single-player version of the game. I made two separate <i>nested lists</i> to allow the user to enter the location of their own ships and made four <i>variables</i> to track each player's hits and misses. By importing the <i>time library</i>, I was able to clear the console after a certain amount of time to hide the locations of the other players ships. Beyond this point, the game stays broadly similar to how single-player works. The user enters a coordinate, and the program determines if it is a hit or a miss and places a ‘1’ or an ‘X’ accordingly. The main change I had to implement for this version of the game was that the console now clears after every turn to make the game easier to follow for both players and, to hide the progress of the other player. If one of the players wins, or the player runs out of guesses, the game ends, and the code displays the winner. Then a summary is displayed of hits and misses, and appends data to the CSV file.</p><br>
+
+  <b>Simulation play</b><br>
+  <p>I found coding the simulation mode to be the easiest out of all three modes. First, I changed the code so that a random item would be picked out of the <i>list ‘row’</i> to get the letter part of the coordinate and then use <i>randint</i> to get the other part of the coordinate. I used the code from single-player and altered the <i>while loop</i> so that the game would repeat the number of times the users had entered. Then I used the code from single-player to mark hits and misses. After the game is repeated the number of times the user specified, a summary is shown of the number of games won or lost.</p><br>
+  
+  <b>Problem</b><br>
+  <p>Many of the complications I encountered in programming the model seemed difficult at first but ended up being small syntax errors and were easy to fix when I found them.<br><br>
+    One major factor of game play that I simply overlooked was the possibility of guessing the same coordinate more than once. Testing the single-player version of the game was the first time I came across the issue, although it ran through all modes of play. After finding the problem, I found that if a player had found one ship, they could simply guess the same coordinate two more times, and the program would determine that the player had won the game.<br><br>
+    Searching through the code, I found out where the problem was. It was in the <i>if statement</i> on line 95. I soon realised the issue was in the order of the <i>if statements</i>. The error was that the first <i>if statement</i> checks whether the coordinate was a hit or miss. Although I did have code determine if coordinate had been hit previously, the case would never run as it was located below this first <i>if statement</i>.<br><br>To fix this problem, I had to change the <i>if statement</i> so that the first case would check whether the coordinate had been hit previously and that the second case would check for a hit and then for a miss. I then had to replace all game modes with the fixed code so that all game modes would function properly.</p><br>
+    
+
+    <img align=centre src = "images/code_problem_implamentation.png" width= 70%>
+    <br><br><br>
+  
+  <b>Algorithm</b><br>
+    <p>The code shown below was probably the most important for my project as it is central to the operation of the game. First, the code checks whether the coordinate has already been hit or missed by checking if the coordinate on the board has already been replaced by an ‘X’ or an '1'. If so, the code prints ‘You've already guessed this coordinate!’ and makes no changes to hits or misses. The <i>elif statement</i> on line 99 checks whether the coordinate the user entered matches one that is in the selected list. If the coordinate was a ‘hit’, it marks a ‘1’ on the board, adds one to the <i>hit’s variable</i>, and subtracts one from the guesses left. After that, there is another else statement. Within this <i>else statement</i>, there is an <i>if statement</i> that will not run, as I went back and put boundaries on the coordinates that could be entered. The <i>else statement</i> determines that the coordinate entered was a miss, marks an ‘X’ on the board, adds one to the <i>misses variable</i>, and subtracts one from the guesses left.</p><br>
+    <img align=left src = "images/important code1.jpg" width= 49%>
+    <img align=right src = "images/important code 2.jpg" width= 49%>
+  </div>
+  <br><hr>
+
+<div id='testing' class = 'container'>
+  <br><br>
+  <h3 class= "blue-text">Testing</h3>
+  <br>
+    <p>Throughout my project, I used both unit and system testing to determine whether my project was working as I had intended.</p>
+  <br><b>Unit testing</b><br>
+  <p>One of the main sections of code I used unit testing for was the multiplayer section.<br><br>I made sure to do unit testing as, through my Leaving Cert Computer Science course, I have learned that if proper unit testing is done in early development when needed can save a lot of time in the long run. Timing being an essential aspect of this project, I made sure to use unit testing when appropriate.<br><br>I put the multiplayer function in a separate Python file and worked through the code by itself without interference from the rest of the code, and I was able to work through my errors this way.<br><br>In doing this, I was also able to identify dependencies on other code in the project. </p><br>
+  
+  <b>System testing</b><br><br>
+  <p>The main types of system testing I focused on in this project were usability testing and regression testing. When making the artifact for this project, I would consistently test the user’s ease of use of the application, the ability of the game to meet the project requirements, and to make sure none of the changes made over the course of the development process had caused new bugs.</p><br>
+  
+  <p><b>Accepting input for the menu</b></p>
+  <table class='table table-bordered table-hover'>
+    <thead>
+      <th>Category</th>
+      <th>Test data</th>
+      <th>Expected result</th>
+      <th>Actual result</th>
+      <th>Passed</th>
+    </thead>
+    <tbody>
+       <tr class="success">
+        <td>Normal</td>
+        <td>2</td>
+        <td>Data accepted</td>
+        <td>Data accepted</td>
+        <td>Pass</td>
+      </tr>
+      <tr class="success">
+        <td>Extreme</td>
+        <td>1</td>
+        <td>Data accepted</td>
+        <td>Data accepted</td>
+        <td>Pass</td>
+      </tr>
+      <tr class="success">
+        <td>Extreme</td>
+        <td>3</td>
+        <td>Data accepted</td>
+        <td>Data accepted</td>
+        <td>Pass</td>
+      </tr>
+      <tr class="success">
+        <td>Exceptional</td>
+        <td>0</td>
+        <td>Data rejected</td>
+        <td>Data rejected</td>
+        <td>Pass</td>
+      <tr class="success">
+        <td>Exceptional</td>
+        <td>hello world</td>
+        <td>Data rejected</td>
+        <td>Data rejected</td>
+        <td>Pass</td>
+      </tr>
+      </tr>
+  </table>
+  <br>
+  <p><b>Accepting input for entered ship locations (Number from 1 to 6)</b></p>
+  <table class='table table-bordered table-hover'>
+    <thead>
+      <th>Category</th>
+      <th>Test data</th>
+      <th>Expected result</th>
+      <th>Actual result</th>
+      <th>Passed</th>
+    </thead>
+    <tbody>
+       <tr class="success">
+        <td>Normal</td>
+        <td>2</td>
+        <td>Data accepted</td>
+        <td>Data accepted</td>
+        <td>Pass</td>
+      </tr>
+      <tr class="success">
+        <td>Normal</td>
+        <td>4</td>
+        <td>Data accepted</td>
+        <td>Data accepted</td>
+        <td>Pass</td>
+      </tr>
+      <tr class="success">
+        <td>Extreme</td>
+        <td>1</td>
+        <td>Data accepted</td>
+        <td>Data accepted</td>
+        <td>Pass</td>
+      </tr>
+      <tr class="success">
+        <td>Extreme</td>
+        <td>6</td>
+        <td>Data accepted</td>
+        <td>Data accepted</td>
+        <td>Pass</td>
+      </tr>
+      <tr class="success">
+        <td>Exceptional</td>
+        <td>0</td>
+        <td>Data rejected</td>
+        <td>Data accepted</td>
+        <td>Failed</td>
+      <tr class="success">
+        <td>Exceptional</td>
+        <td>hello world</td>
+        <td>Data rejected</td>
+        <td>Data rejected</td>
+        <td>Pass</td>
+      </tr>
+      </tr>
+  </table>
+
+</div>
+  </div>
+  <br><hr>
+
+  <div id='evaluation' class = 'container'>
+    <br><br><h3 class= "blue-text ">Evaluation</h3>
+    <br><b>Objectives complete</b><br><br>
+    <ul>
+      <li>Through sticking to a timeline, I was able to allocate time to the most important aspects of the project.</li>
+      <li>By the end I had completed most of my objectives; I was able to make a basic version of the game battleship, store hits and misses in a CSV file, use this data to for analysis, reveal the locations of the ships after the game had been completed, change parameters by changing the number of guesses allowed and allowed the user to enter how many times the simulation play will run.</li>
+      <li>One objective that I didn’t have time to complete was difficulty levels.</li>
+    </ul>
+    <br><b>How I would improve my project in the future</b><br><br>
+    <ul>
+      <li>To develop the project further I would add the objective I did not have time to complete. I think adding game difficulty levels would be a great addition to the game.</li>
+      <li>For the easy mode I would change the <i>guesses variable</i> to 25 but keep the same number of ships, for medium I would keep the <i>guesses variable</i> at 20 but increase the number of ships to 5. For hard mode I would decrease the <i>guesses variable</i> to 15 and keep the number of ships at 5.</li>
+    </ul>
+    <br><b>Hypothesis and changing parameters</b><br>
+    <ul>
+      <li>Using the model I created, I was able to answer my hypothesis of ‘which pre-set board has the highest chances of winning when <i>total_guesses = 20</i>. Figure 1 shows that, by very small margins that pre-set layout 2 has more wins than the others.</li>
+      <li>For changing the parameters, I decided to change the number of <i>total_guesses</i> available to the computer.</li>
+      <li>Using the model, I was able to graph the different ratios of wins to losses based on both the pre-set layout and the number of guesses available.</li>
+      <li>Interestingly, by doing so I was able to recognise a pattern for the relationship between the guesses available and the percentage wins. When variable <i>guesses</i> is increased by 5, win percentage is increased by around 10%.</li>
+    </ul>
+    <br><br>
+    <img align=left src = "images/fig1simulation_wins_vs_losses.png" width= 50%>
+    <img align=right src = "images/fig3simulation_wins_vs_losses_guesses25.png" width= 50%>
+    <br>
+    <img align=left src = "images/fig4simulation_wins_vs_losses_guesses30.png" width= 50%>
+    <img align=right src = "images/fig2num_hits.png" width= 50%>
+  </div>
+  <br><hr> 
+
+  <div id='references' class = 'container'>
+    <br><br>
+    <h3 class= "blue-text ">References</h3>
+    <ol>
+      <li>Flores, J. (n.d.). How to create a Python text-based game. Instructables. Retrieved from <a href="https://www.instructables.com/How-to-Create-a-Python-Text-Based-Game/">https://www.instructables.com/How-to-Create-a-Python-Text-Based-Game/</a></li>
+      
+      <li>Fashingbauer Cooper, G. (2022, December 26). Best Wordle tips and tricks: Everything I learned playing for a full year. CNET. Retrieved from  <a href="https://www.cnet.com/culture/best-wordle-tips-and-tricks-everything-i-learned-playing-for-a-full-year/">https://www.cnet.com/culture/best-wordle-tips-and-tricks-everything-i-learned-playing-for-a-full-year/</a></li>
+      <li>FabLearn Fellows. (n.d.). Uno lab. Stanford University School of Education. Retrieved March 19, 2023, from <a href="https://cs.fablearn.org/labs/2-2-uno%20lab.html">https://cs.fablearn.org/labs/2-2-uno%20lab.html</a></li>
+      
+      <li>Stack Overflow. (2020, November 9). Python UNO card game [Online forum post]. Retrieved from <a href="https://stackoverflow.com/questions/64697865/python-uno-card-game">https://stackoverflow.com/questions/64697865/python-uno-card-game</a></li>
+      
+      <li>Martin, B. (2017, July 15). Uno (Text-Based) (Python recipe). ActiveState. Retrieved from <a href="https://code.activestate.com/recipes/580811-uno-text-based/">https://code.activestate.com/recipes/580811-uno-text-based/</a></li>
+      
+      <li>Wikipedia contributors. (2023, March 19). Battleship (game). In Wikipedia. Retrieved March 19, 2023, from <a href="https://en.wikipedia.org/wiki/Battleship_(game)">https://en.wikipedia.org/wiki/Battleship_(game)</a></li>
+      
+      <li>cloud2236863496. (2019, August). Excellent battleship game written in Python [Online forum post]. Retrieved from <a href="https://discuss.codecademy.com/t/excellent-battleship-game-written-in-python/430605">https://discuss.codecademy.com/t/excellent-battleship-game-written-in-python/430605</a></li>  
+      <li>Matplotlib. (n.d.). Matplotlib: Visualization with Python. Retrieved March 19, 2023, from <a href="https://matplotlib.org/">https://matplotlib.org/</a></li>
+
+      
+    </ol>
+  </div>
+  <br><hr>
+
+  <div id='wordcount' class='container'>
+    <br><br>
+    <h3 class= "blue-text ">Word count</h3>
+  <table class='table table-hover'>
+    <thead>
+      <th>Section</th>
+      <th>Word count</th>
+    </thead>
+    <tbody>
+      <td>1. Meeting the Brief</td>
+      <td>0</td>
+    </tbody>
+    <tbody>
+      <td>2. Investigation and Plan</td>
+      <td>508</td>
+    </tbody>
+    <tbody>
+      <td>3. Design</td>
+      <td>403</td>
+    </tbody>
+    <tbody>
+      <td>4. Implementation</td>
+      <td>936</td>
+    </tbody>
+    <tbody>
+      <td>5. Testing</td>
+      <td>326</td>
+    </tbody>
+    <tbody>
+      <td>6. Evaluation</td>
+      <td>327</td>
+    </tbody>
+    <tbody>
+      <td><b>Total</b></td>
+      <td><b>2,500</b></td>
+    </tbody>
+  </table>
+</div>
+
+<br><br><br><br><br><br><br>
+  <footer class="container-fluid text-center">
+  <a href="#top" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p>Leaving Cert CS Battleship Project 2023</p>
+</footer>
+  
+  <script src="script.js"></script>
+
+</html>
